@@ -9,10 +9,14 @@
 </head>
 <body>
 <h1>How to use</h1>
+<?php if (!empty($error)) { ?>
+    <p><?php echo htmlspecialchars($error, ENT_QUOTES, 'UTF-8'); ?></p>
+<?php } ?>
 <pre><?php
 
     $protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-    echo $protocol . $_SERVER['HTTP_HOST'];
+    $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+    echo htmlspecialchars($protocol . $host, ENT_QUOTES, 'UTF-8');
     ?>/?your_url_here</pre>
 </body>
 </html>
